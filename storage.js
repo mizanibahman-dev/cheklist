@@ -1,6 +1,7 @@
-﻿const STORAGE_KEY = "moraghebeh_data_v1";
+﻿const STORAGE_KEY = "moraghebeh_v1";
 
-function loadHabits() {
+function getHabits() {
+
     const data = localStorage.getItem(STORAGE_KEY);
 
     if (data) {
@@ -8,28 +9,27 @@ function loadHabits() {
     }
 
     return [];
+
 }
 
 function saveHabits(habits) {
+
     localStorage.setItem(
         STORAGE_KEY,
         JSON.stringify(habits)
     );
+
 }
 
-function addHabit(name) {
+function createHabit(name) {
 
-    const habits = loadHabits();
+    const habits = getHabits();
 
     habits.push({
 
         id: Date.now(),
 
         name: name,
-
-        positive: 0,
-
-        negative: 0,
 
         history: {}
 
@@ -39,19 +39,19 @@ function addHabit(name) {
 
 }
 
-function updateHabit(id, type) {
+function addResult(id, positive) {
 
-    const habits = loadHabits();
+    const habits = getHabits();
 
     const today = new Date().toLocaleDateString("fa-IR");
 
-    habits.forEach(h => {
+    habits.forEach(habit => {
 
-        if (h.id === id) {
+        if (habit.id == id) {
 
-            if (!h.history[today]) {
+            if (!habit.history[today]) {
 
-                h.history[today] = {
+                habit.history[today] = {
 
                     positive: 0,
 
@@ -61,17 +61,13 @@ function updateHabit(id, type) {
 
             }
 
-            if (type === "positive") {
+            if (positive) {
 
-                h.positive++;
-
-                h.history[today].positive++;
+                habit.history[today].positive++;
 
             } else {
 
-                h.negative++;
-
-                h.history[today].negative++;
+                habit.history[today].negative++;
 
             }
 
@@ -83,12 +79,24 @@ function updateHabit(id, type) {
 
 }
 
-function getSuccessPercent(habit) {
+function getPercent(habit) {
 
-    const total = habit.positive + habit.negative;
+    let positive = 0;
 
-    if (total === 0) return 0;
+    let negative = 0;
 
-    return Math.round((habit.positive / total) * 100);
+    Object.values(habit.history).forEach(day => {
+
+        positive += day.positive;
+
+        negative += day.negative;
+
+    });
+
+    const total = positive + negative;
+
+    if (total == 0) return 0;
+
+    return Math.round((positive / total) * 100);
 
 }

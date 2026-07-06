@@ -2,51 +2,94 @@
 <html lang="fa" dir="rtl">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مراقبه</title>
 
-    <link rel="manifest" href="manifest.json">
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="theme-color" content="#2ecc71">
+
+<title>مراقبه</title>
+
+<link rel="manifest" href="manifest.json">
+
+<link rel="stylesheet" href="style.css">
+
 </head>
 
 <body>
 
 <header>
-    <h1>📿 مراقبه</h1>
-    <div id="todayDate"></div>
+
+<h1>📿 مراقبه</h1>
+
+<div id="todayDate"></div>
+
 </header>
 
-<section class="addHabit">
+<div class="addBox">
 
-    <input
-        id="habitName"
-        type="text"
-        placeholder="رفتار جدید..."
-    >
+<input
+id="habitName"
+type="text"
+placeholder="رفتار جدید را وارد کنید">
 
-    <button id="addHabitBtn">
-        افزودن
-    </button>
+<button id="addHabitBtn">
 
-</section>
+افزودن
 
-<main id="habitList">
-</main>
+</button>
 
-<nav class="bottomNav">
+</div>
 
-    <button id="homeBtn">
-        خانه
-    </button>
+<div id="habitList">
 
-    <button id="chartBtn">
-        آمار
-    </button>
+</div>
+
+<div id="chartPage" class="hidden">
+
+<h2>
+
+آمار موفقیت
+
+</h2>
+
+<canvas
+
+id="chartCanvas"
+
+width="800"
+
+height="260">
+
+</canvas>
+
+</div>
+
+<nav>
+
+<button id="homeBtn">
+
+🏠
+
+خانه
+
+</button>
+
+<button id="statsBtn">
+
+📊
+
+آمار
+
+</button>
 
 </nav>
 
 <script src="storage.js"></script>
+
+<script src="chart.js"></script>
+
 <script src="app.js"></script>
 
 </body>

@@ -1,33 +1,49 @@
-﻿const input = document.getElementById("habitName");
-const button = document.getElementById("addHabitBtn");
-const list = document.getElementById("habitList");
+﻿const list = document.getElementById("habitList");
+
+const input = document.getElementById("habitName");
+
+const addBtn = document.getElementById("addHabitBtn");
+
+const today = new Date();
 
 document.getElementById("todayDate").innerHTML =
-new Date().toLocaleDateString("fa-IR");
+today.toLocaleDateString("fa-IR");
 
-button.onclick = function () {
+addBtn.onclick = () => {
 
     const name = input.value.trim();
 
-    if (name === "") return;
+    if (name == "") return;
 
-    addHabit(name);
+    createHabit(name);
 
     input.value = "";
 
     render();
 
-};
+}
 
 function render() {
 
-    const habits = loadHabits();
-
     list.innerHTML = "";
+
+    const habits = getHabits();
 
     habits.forEach(habit => {
 
-        const percent = getSuccessPercent(habit);
+        let positive = 0;
+
+        let negative = 0;
+
+        Object.values(habit.history).forEach(day => {
+
+            positive += day.positive;
+
+            negative += day.negative;
+
+        });
+
+        let percent = getPercent(habit);
 
         let color = "#e74c3c";
 
@@ -38,16 +54,16 @@ function render() {
 
 <div class="card">
 
-<div class="row">
+<div class="topRow">
 
-<div class="title">
+<div class="habitTitle">
 
 ${habit.name}
 
 </div>
 
-<div class="circle"
-
+<div
+class="percentCircle"
 style="background:${color};">
 
 ${percent}%
@@ -56,41 +72,39 @@ ${percent}%
 
 </div>
 
-<div class="buttons">
+<div class="counterRow">
 
-<button
+<div>
 
-class="plus"
-
-onclick="plus(${habit.id})">
-
-➕
-
-</button>
-
-<button
-
-class="minus"
-
-onclick="minus(${habit.id})">
-
-➖
-
-</button>
+✅ ${positive}
 
 </div>
 
-<div style="margin-top:10px">
+<div>
 
-مثبت:
+❌ ${negative}
 
-${habit.positive}
+</div>
 
-&nbsp;&nbsp;&nbsp;
+</div>
 
-منفی:
+<div class="buttons">
 
-${habit.negative}
+<button
+class="plus"
+onclick="plus(${habit.id})">
+
+＋
+
+</button>
+
+<button
+class="minus"
+onclick="minus(${habit.id})">
+
+－
+
+</button>
 
 </div>
 
@@ -104,7 +118,7 @@ ${habit.negative}
 
 function plus(id){
 
-    updateHabit(id,"positive");
+    addResult(id,true);
 
     render();
 
@@ -112,7 +126,7 @@ function plus(id){
 
 function minus(id){
 
-    updateHabit(id,"negative");
+    addResult(id,false);
 
     render();
 
