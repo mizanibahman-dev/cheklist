@@ -1,4 +1,4 @@
-const STORAGE_KEY = "moraghebeh_data_v1";
+﻿const STORAGE_KEY = "moraghebeh_data_v1";
 
 function loadHabits() {
     const data = localStorage.getItem(STORAGE_KEY);

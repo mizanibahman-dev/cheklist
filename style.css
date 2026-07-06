@@ -1,54 +1,206 @@
-<!DOCTYPE html>
-<html lang="fa" dir="rtl">
+Ôªø*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:tahoma;
+}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>„—«ﬁ»Â</title>
+body{
 
-    <link rel="manifest" href="manifest.json">
-    <link rel="stylesheet" href="style.css">
-</head>
+background:#f5f6fa;
 
-<body>
+padding:15px;
 
-<header>
-    <h1>?? „—«ﬁ»Â</h1>
-    <div id="todayDate"></div>
-</header>
+}
 
-<section class="addHabit">
+header{
 
-    <input
-        id="habitName"
-        type="text"
-        placeholder="—› «— ÃœÌœ..."
-    >
+text-align:center;
 
-    <button id="addHabitBtn">
-        «›“Êœ‰
-    </button>
+margin-bottom:20px;
 
-</section>
+}
 
-<main id="habitList">
-</main>
+h1{
 
-<nav class="bottomNav">
+font-size:32px;
 
-    <button id="homeBtn">
-        Œ«‰Â
-    </button>
+color:#222;
 
-    <button id="chartBtn">
-        ¬„«—
-    </button>
+}
 
-</nav>
+#todayDate{
 
-<script src="storage.js"></script>
-<script src="app.js"></script>
+margin-top:8px;
 
-</body>
+color:#777;
 
-</html>
+}
+
+.addHabit{
+
+display:flex;
+
+gap:10px;
+
+margin-bottom:20px;
+
+}
+
+.addHabit input{
+
+flex:1;
+
+padding:12px;
+
+font-size:18px;
+
+border-radius:12px;
+
+border:1px solid #ccc;
+
+}
+
+.addHabit button{
+
+padding:12px 20px;
+
+background:#2ecc71;
+
+color:white;
+
+border:none;
+
+border-radius:12px;
+
+font-size:17px;
+
+}
+
+.card{
+
+background:white;
+
+border-radius:16px;
+
+padding:15px;
+
+margin-bottom:15px;
+
+box-shadow:0 2px 10px rgba(0,0,0,.08);
+
+}
+
+.title{
+
+font-size:20px;
+
+font-weight:bold;
+
+margin-bottom:15px;
+
+}
+
+.row{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+}
+
+.circle{
+
+width:60px;
+
+height:60px;
+
+border-radius:50%;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+color:white;
+
+font-weight:bold;
+
+font-size:18px;
+
+}
+
+.buttons{
+
+display:flex;
+
+gap:10px;
+
+margin-top:15px;
+
+}
+
+.buttons button{
+
+flex:1;
+
+padding:12px;
+
+border:none;
+
+border-radius:12px;
+
+font-size:18px;
+
+}
+
+.plus{
+
+background:#27ae60;
+
+color:white;
+
+}
+
+.minus{
+
+background:#e74c3c;
+
+color:white;
+
+}
+
+.bottomNav{
+
+position:fixed;
+
+bottom:0;
+
+right:0;
+
+left:0;
+
+background:white;
+
+padding:12px;
+
+display:flex;
+
+justify-content:space-around;
+
+box-shadow:0 -2px 10px rgba(0,0,0,.1);
+
+}
+
+.bottomNav button{
+
+background:none;
+
+border:none;
+
+font-size:18px;
+
+}

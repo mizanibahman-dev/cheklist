@@ -1,4 +1,4 @@
-const input = document.getElementById("habitName");
+ï»¿const input = document.getElementById("habitName");
 const button = document.getElementById("addHabitBtn");
 const list = document.getElementById("habitList");
 
@@ -64,7 +64,7 @@ class="plus"
 
 onclick="plus(${habit.id})">
 
-?
+â•
 
 </button>
 
@@ -74,7 +74,7 @@ class="minus"
 
 onclick="minus(${habit.id})">
 
-?
+â–
 
 </button>
 
@@ -82,13 +82,13 @@ onclick="minus(${habit.id})">
 
 <div style="margin-top:10px">
 
-ãËÈÊ:
+Ù…Ø«Ø¨Øª:
 
 ${habit.positive}
 
 &nbsp;&nbsp;&nbsp;
 
-ãäİí:
+Ù…Ù†ÙÛŒ:
 
 ${habit.negative}
 
