@@ -76,47 +76,137 @@ input.addEventListener("keydown", function(e){
 // نمایش لیست
 //=====================
 
-function render(){
+//=====================
+// ترتیب سربرگ ها
+//=====================
+
+const taskSections = [
+
+    "allTasks",
+
+    "currentTasks",
+
+    "todayTasks"
+
+];
+
+const shoppingSections = [
+
+    "dailyShopping",
+
+    "otherShopping"
+
+];
+
+function getSections(){
+
+    return currentMain==="tasks"
+
+        ? taskSections
+
+        : shoppingSections;
+
+} function render(){
 
     listContainer.innerHTML="";
 
-    data[currentSection].forEach(item=>{
+    data[currentSection].forEach((item,index)=>{
 
         const node=template.content.cloneNode(true);
 
-        node.querySelector(".text").textContent=item.text;
+        const card=node.querySelector(".item");
+
+        const text=node.querySelector(".text");
 
         const check=node.querySelector(".done");
 
-check.checked=item.completed;
+        const left=node.querySelector(".move-left");
 
-check.addEventListener("change",()=>{
+        const right=node.querySelector(".move-right");
 
-    item.completed=check.checked;
+        text.textContent=item.text;
 
-    if(typeof saveData==="function"){
-
-        saveData(data);
-
-    }
-
-    render();
-
-});
+        check.checked=item.completed;
 
         if(item.completed){
 
-            node.querySelector(".item").classList.add("completed");
+            card.classList.add("completed");
 
         }
+
+        // انجام شده
+
+        check.addEventListener("change",()=>{
+
+            item.completed=check.checked;
+
+            saveData(data);
+
+            render();
+
+        });
+
+        // فلش چپ
+
+        left.addEventListener("click",()=>{
+
+            moveItem(index,-1);
+
+        });
+
+        // فلش راست
+
+        right.addEventListener("click",()=>{
+
+            moveItem(index,1);
+
+        });
 
         listContainer.appendChild(node);
 
     });
 
-}
+}//=====================
+// انتقال بین سربرگ ها
+//=====================
 
-render();//=====================
+function moveItem(index,dir){
+
+    const sections=getSections();
+
+    const currentIndex=sections.indexOf(currentSection);
+
+    const newIndex=currentIndex+dir;
+
+    if(newIndex<0)return;
+
+    if(newIndex>=sections.length)return;
+
+    const item=data[currentSection][index];
+
+    data[currentSection].splice(index,1);
+
+    data[sections[newIndex]].push(item);
+
+    saveData(data);
+
+    currentSection=sections[newIndex];
+
+    document.querySelectorAll(".sub-tab").forEach(btn=>{
+
+        btn.classList.remove("active");
+
+        if(btn.dataset.section===currentSection){
+
+            btn.classList.add("active");
+
+        }
+
+    });
+
+    render();
+
+}//=====================
 // سربرگ های اصلی
 //=====================
 
