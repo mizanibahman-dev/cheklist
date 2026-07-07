@@ -64,7 +64,7 @@ function addItem() {
 
 addBtn.addEventListener("click", addItem);
 
-input.addEventListener("keypress", function(e){
+input.addEventListener("keydown", function(e){
 
     if(e.key==="Enter"){
 
