@@ -86,7 +86,23 @@ function render(){
 
         node.querySelector(".text").textContent=item.text;
 
-        node.querySelector(".done").checked=item.completed;
+        const check=node.querySelector(".done");
+
+check.checked=item.completed;
+
+check.addEventListener("change",()=>{
+
+    item.completed=check.checked;
+
+    if(typeof saveData==="function"){
+
+        saveData(data);
+
+    }
+
+    render();
+
+});
 
         if(item.completed){
 
@@ -100,4 +116,76 @@ function render(){
 
 }
 
-render();
+render();//=====================
+// سربرگ های اصلی
+//=====================
+
+const mainTabs = document.querySelectorAll(".main-tab");
+const subTabs = document.querySelectorAll(".sub-tab");
+
+const tasksTabs = document.getElementById("tasksTabs");
+const shoppingTabs = document.getElementById("shoppingTabs");
+
+mainTabs.forEach(btn=>{
+
+    btn.addEventListener("click",()=>{
+
+        mainTabs.forEach(b=>b.classList.remove("active"));
+
+        btn.classList.add("active");
+
+        currentMain=btn.dataset.main;
+
+        if(currentMain==="tasks"){
+
+            tasksTabs.classList.remove("hidden");
+            shoppingTabs.classList.add("hidden");
+
+            currentSection="allTasks";
+
+        }else{
+
+            shoppingTabs.classList.remove("hidden");
+            tasksTabs.classList.add("hidden");
+
+            currentSection="dailyShopping";
+
+        }
+
+        document.querySelectorAll(".sub-tab").forEach(t=>t.classList.remove("active"));
+
+        if(currentMain==="tasks"){
+
+            tasksTabs.querySelector(".sub-tab").classList.add("active");
+
+        }else{
+
+            shoppingTabs.querySelector(".sub-tab").classList.add("active");
+
+        }
+
+        render();
+
+    });
+
+});//=====================
+// زیر سربرگ ها
+//=====================
+
+subTabs.forEach(btn=>{
+
+    btn.addEventListener("click",()=>{
+
+        const parent=btn.parentElement;
+
+        parent.querySelectorAll(".sub-tab").forEach(b=>b.classList.remove("active"));
+
+        btn.classList.add("active");
+
+        currentSection=btn.dataset.section;
+
+        render();
+
+    });
+
+});
