@@ -166,13 +166,7 @@ function getSections(){
 
     });
 
-}//const sections=getSections();
-
-const currentIndex=sections.indexOf(currentSection);
-
-left.disabled=currentIndex===0;
-
-right.disabled=currentIndex===sections.length-1;=====================
+}//=====================
 // انتقال بین سربرگ ها
 //=====================
 
