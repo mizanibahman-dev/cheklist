@@ -204,4 +204,11 @@ h1{
         font-size:14px;
     }
 
+}.move-left:disabled,
+.move-right:disabled{
+
+    opacity:.35;
+
+    cursor:default;
+
 }

@@ -58,7 +58,37 @@ function addItem() {
 
     input.value = "";
 
-    render();
+  //=====================
+// ترتیب سربرگ ها
+//=====================
+
+const taskSections = [
+
+    "allTasks",
+
+    "currentTasks",
+
+    "todayTasks"
+
+];
+
+const shoppingSections = [
+
+    "dailyShopping",
+
+    "otherShopping"
+
+];
+
+function getSections(){
+
+    return currentMain==="tasks"
+
+        ? taskSections
+
+        : shoppingSections;
+
+}  render();
 
 }
 
@@ -74,101 +104,113 @@ input.addEventListener("keydown", function(e){
 
 });//=====================
 // نمایش لیست
-//=====================
-
-function render(){
+//=====================function render(){
 
     listContainer.innerHTML="";
 
-    data[currentSection].forEach(item=>{
+    data[currentSection].forEach((item,index)=>{
 
         const node=template.content.cloneNode(true);
 
-        node.querySelector(".text").textContent=item.text;
+        const card=node.querySelector(".item");
+
+        const text=node.querySelector(".text");
 
         const check=node.querySelector(".done");
 
-check.checked=item.completed;
+        const left=node.querySelector(".move-left");
 
-check.addEventListener("change",()=>{
+        const right=node.querySelector(".move-right");
 
-    item.completed=check.checked;
+        text.textContent=item.text;
 
-    if(typeof saveData==="function"){
-
-        saveData(data);
-
-    }
-
-    render();
-
-});
+        check.checked=item.completed;
 
         if(item.completed){
 
-            node.querySelector(".item").classList.add("completed");
+            card.classList.add("completed");
 
         }
 
-        listContainer.appendChild(node);
+        // انجام شده
+
+        check.addEventListener("change",()=>{
+
+            item.completed=check.checked;
+
+            saveData(data);
+
+            render();
+
+        });
+
+        // فلش چپ
+
+        left.addEventListener("click",()=>{
+
+            moveItem(index,-1);
+
+        });
+
+        // فلش راست
+
+        right.addEventListener("click",()=>{
+
+            moveItem(index,1);
+
+        });
+
+  const sections=getSections();
+
+const currentIndex=sections.indexOf(currentSection);
+
+left.disabled=currentIndex===0;
+
+right.disabled=currentIndex===sections.length-1;      listContainer.appendChild(node);
 
     });
 
-}
-
-render();//=====================
-// سربرگ های اصلی
+}//=====================
+// انتقال بین سربرگ ها
 //=====================
 
-const mainTabs = document.querySelectorAll(".main-tab");
-const subTabs = document.querySelectorAll(".sub-tab");
+function moveItem(index,dir){
 
-const tasksTabs = document.getElementById("tasksTabs");
-const shoppingTabs = document.getElementById("shoppingTabs");
+    const sections=getSections();
 
-mainTabs.forEach(btn=>{
+    const currentIndex=sections.indexOf(currentSection);
 
-    btn.addEventListener("click",()=>{
+    const newIndex=currentIndex+dir;
 
-        mainTabs.forEach(b=>b.classList.remove("active"));
+    if(newIndex<0)return;
 
-        btn.classList.add("active");
+    if(newIndex>=sections.length)return;
 
-        currentMain=btn.dataset.main;
+    const item=data[currentSection][index];
 
-        if(currentMain==="tasks"){
+    data[currentSection].splice(index,1);
 
-            tasksTabs.classList.remove("hidden");
-            shoppingTabs.classList.add("hidden");
+    data[sections[newIndex]].push(item);
 
-            currentSection="allTasks";
+    saveData(data);
 
-        }else{
+    currentSection=sections[newIndex];
 
-            shoppingTabs.classList.remove("hidden");
-            tasksTabs.classList.add("hidden");
+    document.querySelectorAll(".sub-tab").forEach(btn=>{
 
-            currentSection="dailyShopping";
+        btn.classList.remove("active");
 
-        }
+        if(btn.dataset.section===currentSection){
 
-        document.querySelectorAll(".sub-tab").forEach(t=>t.classList.remove("active"));
-
-        if(currentMain==="tasks"){
-
-            tasksTabs.querySelector(".sub-tab").classList.add("active");
-
-        }else{
-
-            shoppingTabs.querySelector(".sub-tab").classList.add("active");
+            btn.classList.add("active");
 
         }
-
-        render();
 
     });
 
-});//=====================
+    render();
+
+}//=====================
 // زیر سربرگ ها
 //=====================
 
