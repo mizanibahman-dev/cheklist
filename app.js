@@ -58,37 +58,7 @@ function addItem() {
 
     input.value = "";
 
-  //=====================
-// ترتیب سربرگ ها
-//=====================
-
-const taskSections = [
-
-    "allTasks",
-
-    "currentTasks",
-
-    "todayTasks"
-
-];
-
-const shoppingSections = [
-
-    "dailyShopping",
-
-    "otherShopping"
-
-];
-
-function getSections(){
-
-    return currentMain==="tasks"
-
-        ? taskSections
-
-        : shoppingSections;
-
-}  render();
+    render();
 
 }
 
@@ -104,130 +74,30 @@ input.addEventListener("keydown", function(e){
 
 });//=====================
 // نمایش لیست
-//=====================function render(){
+//=====================
+
+function render(){
 
     listContainer.innerHTML="";
 
-    data[currentSection].forEach((item,index)=>{
+    data[currentSection].forEach(item=>{
 
         const node=template.content.cloneNode(true);
 
-        const card=node.querySelector(".item");
+        node.querySelector(".text").textContent=item.text;
 
-        const text=node.querySelector(".text");
-
-        const check=node.querySelector(".done");
-
-        const left=node.querySelector(".move-left");
-
-        const right=node.querySelector(".move-right");
-
-        text.textContent=item.text;
-
-        check.checked=item.completed;
+        node.querySelector(".done").checked=item.completed;
 
         if(item.completed){
 
-            card.classList.add("completed");
+            node.querySelector(".item").classList.add("completed");
 
         }
 
-        // انجام شده
-
-        check.addEventListener("change",()=>{
-
-            item.completed=check.checked;
-
-            saveData(data);
-
-            render();
-
-        });
-
-        // فلش چپ
-
-        left.addEventListener("click",()=>{
-
-            moveItem(index,-1);
-
-        });
-
-        // فلش راست
-
-        right.addEventListener("click",()=>{
-
-            moveItem(index,1);
-
-        });
-
-  const sections=getSections();
-
-const currentIndex=sections.indexOf(currentSection);
-
-left.disabled=currentIndex===0;
-
-right.disabled=currentIndex===sections.length-1;      listContainer.appendChild(node);
+        listContainer.appendChild(node);
 
     });
 
-}//=====================
-// انتقال بین سربرگ ها
-//=====================
+}
 
-function moveItem(index,dir){
-
-    const sections=getSections();
-
-    const currentIndex=sections.indexOf(currentSection);
-
-    const newIndex=currentIndex+dir;
-
-    if(newIndex<0)return;
-
-    if(newIndex>=sections.length)return;
-
-    const item=data[currentSection][index];
-
-    data[currentSection].splice(index,1);
-
-    data[sections[newIndex]].push(item);
-
-    saveData(data);
-
-    currentSection=sections[newIndex];
-
-    document.querySelectorAll(".sub-tab").forEach(btn=>{
-
-        btn.classList.remove("active");
-
-        if(btn.dataset.section===currentSection){
-
-            btn.classList.add("active");
-
-        }
-
-    });
-
-    render();
-
-}//=====================
-// زیر سربرگ ها
-//=====================
-
-subTabs.forEach(btn=>{
-
-    btn.addEventListener("click",()=>{
-
-        const parent=btn.parentElement;
-
-        parent.querySelectorAll(".sub-tab").forEach(b=>b.classList.remove("active"));
-
-        btn.classList.add("active");
-
-        currentSection=btn.dataset.section;
-
-        render();
-
-    });
-
-});
+render();
