@@ -2,95 +2,146 @@
 <html lang="fa" dir="rtl">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-<meta charset="UTF-8">
+    <title>چک لیست من</title>
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<meta name="theme-color" content="#2ecc71">
-
-<title>مراقبه</title>
-
-<link rel="manifest" href="manifest.json">
-
-<link rel="stylesheet" href="style.css">
-
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<header>
+    <div class="container">
 
-<h1>📿 مراقبه</h1>
+        <header>
 
-<div id="todayDate"></div>
+            <h1>چک لیست من</h1>
 
-</header>
+            <div class="main-tabs">
 
-<div class="addBox">
+                <button class="main-tab active" data-main="tasks">
+                    📋 کارها
+                </button>
 
-<input
-id="habitName"
-type="text"
-placeholder="رفتار جدید را وارد کنید">
+                <button class="main-tab" data-main="shopping">
+                    🛒 خرید
+                </button>
 
-<button id="addHabitBtn">
+            </div>
 
-افزودن
+        </header>
 
-</button>
+        <!-- زیرسربرگ کارها -->
 
-</div>
+        <div id="tasksTabs" class="sub-tabs">
 
-<div id="habitList">
+            <button class="sub-tab active" data-section="allTasks">
+                کل کارها
+            </button>
 
-</div>
+            <button class="sub-tab" data-section="currentTasks">
+                کارهای جاری
+            </button>
 
-<div id="chartPage" class="hidden">
+            <button class="sub-tab" data-section="todayTasks">
+                کارهای امروز
+            </button>
 
-<h2>
+        </div>
 
-آمار موفقیت
+        <!-- زیرسربرگ خرید -->
 
-</h2>
+        <div id="shoppingTabs" class="sub-tabs hidden">
 
-<canvas
+            <button class="sub-tab active" data-section="dailyShopping">
+                خرید روز
+            </button>
 
-id="chartCanvas"
+            <button class="sub-tab" data-section="otherShopping">
+                سایر
+            </button>
 
-width="800"
+        </div>
 
-height="260">
 
-</canvas>
+        <!-- افزودن آیتم -->
 
-</div>
+        <div class="add-box">
 
-<nav>
+            <input
+                type="text"
+                id="newItem"
+                placeholder="مورد جدید را وارد کنید...">
 
-<button id="homeBtn">
+            <button id="addBtn">
+                افزودن
+            </button>
 
-🏠
+        </div>
 
-خانه
 
-</button>
+        <!-- دکمه حذف انجام شده ها -->
 
-<button id="statsBtn">
+        <div class="toolbar">
 
-📊
+            <button id="deleteCompleted">
 
-آمار
+                حذف انجام شده‌ها
 
-</button>
+            </button>
 
-</nav>
+        </div>
 
-<script src="storage.js"></script>
 
-<script src="chart.js"></script>
+        <!-- لیست -->
 
-<script src="app.js"></script>
+        <div id="listContainer">
+
+        </div>
+
+    </div>
+
+
+    <!-- قالب هر آیتم -->
+
+    <template id="itemTemplate">
+
+        <div class="item">
+
+            <button class="move-left">
+                ◀
+            </button>
+
+            <button class="up">
+                ▲
+            </button>
+
+            <input
+                type="checkbox"
+                class="done">
+
+            <span class="text">
+
+            </span>
+
+            <button class="down">
+                ▼
+            </button>
+
+            <button class="move-right">
+                ▶
+            </button>
+
+        </div>
+
+    </template>
+
+
+    <script src="storage.js"></script>
+
+    <script src="app.js"></script>
 
 </body>
 

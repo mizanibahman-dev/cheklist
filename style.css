@@ -1,285 +1,207 @@
 ﻿*{
-
-margin:0;
-
-padding:0;
-
-box-sizing:border-box;
-
-font-family:tahoma;
-
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:tahoma,sans-serif;
 }
 
 body{
-
-background:#f3f5f7;
-
-padding:18px;
-
-padding-bottom:90px;
-
+    background:#f3f5f7;
+    direction:rtl;
+    color:#222;
 }
 
-header{
-
-text-align:center;
-
-margin-bottom:25px;
-
+.container{
+    width:100%;
+    max-width:700px;
+    margin:auto;
+    padding:15px;
 }
 
 h1{
-
-font-size:34px;
-
-color:#222;
-
+    text-align:center;
+    margin-bottom:18px;
+    color:#333;
 }
 
-#todayDate{
+/* سربرگ اصلی */
 
-margin-top:8px;
-
-color:#888;
-
-font-size:15px;
-
+.main-tabs{
+    display:flex;
+    gap:10px;
+    margin-bottom:12px;
 }
 
-.addBox{
-
-display:flex;
-
-gap:10px;
-
-margin-bottom:20px;
-
+.main-tab{
+    flex:1;
+    padding:12px;
+    border:none;
+    border-radius:12px;
+    background:#ddd;
+    font-size:17px;
+    cursor:pointer;
+    transition:.25s;
 }
 
-.addBox input{
-
-flex:1;
-
-padding:14px;
-
-font-size:18px;
-
-border-radius:14px;
-
-border:1px solid #ddd;
-
-outline:none;
-
+.main-tab.active{
+    background:#2196f3;
+    color:white;
 }
 
-.addBox button{
+/* زیر سربرگ */
 
-width:110px;
-
-border:none;
-
-background:#2ecc71;
-
-color:white;
-
-font-size:17px;
-
-border-radius:14px;
-
+.sub-tabs{
+    display:flex;
+    gap:8px;
+    margin-bottom:15px;
 }
 
-.card{
-
-background:white;
-
-border-radius:18px;
-
-padding:18px;
-
-margin-bottom:18px;
-
-box-shadow:0 3px 12px rgba(0,0,0,.08);
-
+.sub-tab{
+    flex:1;
+    padding:10px;
+    border:none;
+    border-radius:10px;
+    background:#ececec;
+    cursor:pointer;
+    font-size:15px;
 }
 
-.topRow{
-
-display:flex;
-
-justify-content:space-between;
-
-align-items:center;
-
-margin-bottom:15px;
-
-}
-
-.habitTitle{
-
-font-size:22px;
-
-font-weight:bold;
-
-color:#222;
-
-}
-
-.percentCircle{
-
-width:70px;
-
-height:70px;
-
-border-radius:50%;
-
-display:flex;
-
-justify-content:center;
-
-align-items:center;
-
-font-size:18px;
-
-font-weight:bold;
-
-color:white;
-
-background:#2ecc71;
-
-}
-
-.counterRow{
-
-display:flex;
-
-justify-content:space-between;
-
-margin-top:15px;
-
-font-size:18px;
-
-}
-
-.buttons{
-
-display:flex;
-
-gap:12px;
-
-margin-top:18px;
-
-}
-
-.buttons button{
-
-flex:1;
-
-padding:14px;
-
-font-size:22px;
-
-border:none;
-
-border-radius:14px;
-
-color:white;
-
-}
-
-.plus{
-
-background:#27ae60;
-
-}
-
-.minus{
-
-background:#e74c3c;
-
+.sub-tab.active{
+    background:#4caf50;
+    color:white;
 }
 
 .hidden{
-
-display:none;
-
+    display:none;
 }
 
-#chartPage{
+/* افزودن */
 
-background:white;
-
-padding:15px;
-
-border-radius:18px;
-
-box-shadow:0 3px 12px rgba(0,0,0,.08);
-
+.add-box{
+    display:flex;
+    gap:8px;
+    margin-bottom:15px;
 }
 
-canvas{
-
-width:100%;
-
+.add-box input{
+    flex:1;
+    padding:12px;
+    border:1px solid #ccc;
+    border-radius:10px;
+    font-size:16px;
 }
 
-nav{
-
-position:fixed;
-
-bottom:0;
-
-right:0;
-
-left:0;
-
-height:65px;
-
-background:white;
-
-display:flex;
-
-justify-content:space-around;
-
-align-items:center;
-
-box-shadow:0 -2px 10px rgba(0,0,0,.1);
-
+.add-box button{
+    width:95px;
+    border:none;
+    border-radius:10px;
+    background:#2196f3;
+    color:white;
+    font-size:16px;
 }
 
-nav button{
+/* نوار ابزار */
 
-background:none;
-
-border:none;
-
-font-size:18px;
-
-color:#333;
-
+.toolbar{
+    display:flex;
+    justify-content:center;
+    margin-bottom:15px;
 }
 
-@media(max-width:480px){
-
-h1{
-
-font-size:28px;
-
+.toolbar button{
+    padding:10px 18px;
+    border:none;
+    border-radius:10px;
+    background:#f44336;
+    color:white;
+    font-size:15px;
 }
 
-.habitTitle{
+/* لیست */
 
-font-size:20px;
-
+.item{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    background:white;
+    border-radius:12px;
+    padding:10px;
+    margin-bottom:10px;
+    box-shadow:0 2px 6px rgba(0,0,0,.08);
 }
 
-.percentCircle{
-
-width:60px;
-
-height:60px;
-
-font-size:16px;
-
+.item span{
+    flex:1;
+    font-size:16px;
+    word-break:break-word;
 }
+
+.item button{
+    width:34px;
+    height:34px;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:16px;
+}
+
+/* رنگ دکمه ها */
+
+.move-left{
+    background:#ff9800;
+    color:white;
+}
+
+.move-right{
+    background:#03a9f4;
+    color:white;
+}
+
+.up{
+    background:#9c27b0;
+    color:white;
+}
+
+.down{
+    background:#795548;
+    color:white;
+}
+
+.done{
+    width:22px;
+    height:22px;
+}
+
+/* انجام شده */
+
+.item.completed{
+    opacity:.55;
+}
+
+.item.completed span{
+    text-decoration:line-through;
+}
+
+/* موبایل */
+
+@media(max-width:600px){
+
+    h1{
+        font-size:22px;
+    }
+
+    .main-tab{
+        font-size:15px;
+    }
+
+    .sub-tab{
+        font-size:13px;
+    }
+
+    .item button{
+        width:32px;
+        height:32px;
+        font-size:14px;
+    }
 
 }

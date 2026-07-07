@@ -1,102 +1,146 @@
-﻿const STORAGE_KEY = "moraghebeh_v1";
+﻿const STORAGE_KEY = "ChecklistAppData_v1";
 
-function getHabits() {
+const defaultData = {
+
+    allTasks: [],
+
+    currentTasks: [],
+
+    todayTasks: [],
+
+    dailyShopping: [],
+
+    otherShopping: []
+
+};
+
+
+// خواندن اطلاعات
+
+function loadData() {
 
     const data = localStorage.getItem(STORAGE_KEY);
 
-    if (data) {
-        return JSON.parse(data);
+    if (!data) {
+
+        saveData(defaultData);
+
+        return JSON.parse(JSON.stringify(defaultData));
+
     }
 
-    return [];
+    try {
+
+        return JSON.parse(data);
+
+    }
+
+    catch (e) {
+
+        console.log(e);
+
+        saveData(defaultData);
+
+        return JSON.parse(JSON.stringify(defaultData));
+
+    }
 
 }
 
-function saveHabits(habits) {
+
+// ذخیره اطلاعات
+
+function saveData(data) {
 
     localStorage.setItem(
+
         STORAGE_KEY,
-        JSON.stringify(habits)
+
+        JSON.stringify(data)
+
     );
 
 }
 
-function createHabit(name) {
 
-    const habits = getHabits();
+// ساخت آیتم جدید
 
-    habits.push({
+function createItem(text) {
 
-        id: Date.now(),
+    return {
 
-        name: name,
+        id: Date.now() + "_" + Math.floor(Math.random()*10000),
 
-        history: {}
+        text: text,
 
-    });
+        completed: false
 
-    saveHabits(habits);
-
-}
-
-function addResult(id, positive) {
-
-    const habits = getHabits();
-
-    const today = new Date().toLocaleDateString("fa-IR");
-
-    habits.forEach(habit => {
-
-        if (habit.id == id) {
-
-            if (!habit.history[today]) {
-
-                habit.history[today] = {
-
-                    positive: 0,
-
-                    negative: 0
-
-                };
-
-            }
-
-            if (positive) {
-
-                habit.history[today].positive++;
-
-            } else {
-
-                habit.history[today].negative++;
-
-            }
-
-        }
-
-    });
-
-    saveHabits(habits);
+    };
 
 }
 
-function getPercent(habit) {
 
-    let positive = 0;
+// گرفتن یک بخش
 
-    let negative = 0;
+function getSection(section){
 
-    Object.values(habit.history).forEach(day => {
+    const data = loadData();
 
-        positive += day.positive;
+    return data[section] || [];
 
-        negative += day.negative;
+}
+
+
+// ذخیره یک بخش
+
+function setSection(section,list){
+
+    const data = loadData();
+
+    data[section]=list;
+
+    saveData(data);
+
+}
+
+
+// انتقال آیتم
+
+function moveItem(from,to,id){
+
+    const data=loadData();
+
+    const index=data[from].findIndex(i=>i.id===id);
+
+    if(index===-1)return;
+
+    const item=data[from][index];
+
+    data[from].splice(index,1);
+
+    data[to].push(item);
+
+    saveData(data);
+
+}
+
+
+// حذف انجام شده ها
+
+function deleteCompleted(){
+
+    const data=loadData();
+
+    Object.keys(data).forEach(section=>{
+
+        data[section]=data[section].filter(
+
+            item=>!item.completed
+
+        );
 
     });
 
-    const total = positive + negative;
-
-    if (total == 0) return 0;
-
-    return Math.round((positive / total) * 100);
+    saveData(data);
 
 }
