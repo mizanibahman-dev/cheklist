@@ -30,9 +30,7 @@ if (typeof loadData === "function") {
 const input = document.getElementById("newItem");
 const addBtn = document.getElementById("addBtn");
 const listContainer = document.getElementById("listContainer");
-const template = document.getElementById("itemTemplate");  const deleteCompletedBtn = document.getElementById("deleteCompleted");let dragIndex = -1;
-let dragElement = null;
-let isDragging = false; //=====================
+const template = document.getElementById("itemTemplate");  const deleteCompletedBtn = document.getElementById("deleteCompleted");//=====================
 // افزودن آیتم
 //=====================
 
@@ -108,11 +106,7 @@ function getSections(){
 
         : shoppingSections;
 
-} function closeMoveMenu(){
-
-    document.querySelectorAll(".move-popup").forEach(m=>m.remove());
-
-}  function render(){
+} function render(){
 
     listContainer.innerHTML="";
 
@@ -130,7 +124,8 @@ function getSections(){
 
         const right=node.querySelector(".move-right");
 
- const menu = node.querySelector(".move-menu");     text.textContent=item.text;
+ const up = node.querySelector(".up");
+const down = node.querySelector(".down");  const handle=node.querySelector(".drag-handle");   text.textContent=item.text;
 
         check.checked=item.completed;
 
@@ -168,65 +163,45 @@ function getSections(){
 
         });
 
- menu.addEventListener("click",(e)=>{
+ // بالا
 
-    e.stopPropagation();
+up.addEventListener("click",()=>{
 
-    closeMoveMenu();
+    if(index===0)return;
 
-    const popup=document.createElement("div");
+    const list=data[currentSection];
 
-    popup.className="move-popup";
+    [list[index],list[index-1]]=[list[index-1],list[index]];
 
-    popup.innerHTML=`
-        <button class="go-up">⬆ بالا</button>
-        <button class="go-down">⬇ پایین</button>
-    `;
+    if(typeof saveData==="function"){
 
-    document.body.appendChild(popup);
+        saveData(data);
 
-    const rect=menu.getBoundingClientRect();
+    }
 
-    popup.style.left=rect.left+"px";
-    popup.style.top=(rect.bottom+5)+"px";
+    render();
 
-    popup.querySelector(".go-up").onclick=()=>{
+});
 
-        if(index>0){
+// پایین
 
-            const list=data[currentSection];
+down.addEventListener("click",()=>{
 
-            [list[index],list[index-1]]=[list[index-1],list[index]];
+    const list=data[currentSection];
 
-            saveData(data);
+    if(index===list.length-1)return;
 
-            closeMoveMenu();
+    [list[index],list[index+1]]=[list[index+1],list[index]];
 
-            render();
+    if(typeof saveData==="function"){
 
-        }
+        saveData(data);
 
-    };
+    }
 
-    popup.querySelector(".go-down").onclick=()=>{
+    render();
 
-        const list=data[currentSection];
-
-        if(index<list.length-1){
-
-            [list[index],list[index+1]]=[list[index+1],list[index]];
-
-            saveData(data);
-
-            closeMoveMenu();
-
-            render();
-
-        }
-
-    };
-
-    listContainer.appendChild(node);
+});    listContainer.appendChild(node);
 
     });
 
@@ -354,13 +329,9 @@ subTabs.forEach(btn=>{
 
     });
 
-}); if(deleteCompletedBtn){
+}); if(deleteCompleted){
     deleteCompletedBtn.addEventListener("click", clearCompleted);
-} document.addEventListener("click",()=>{
-
-    closeMoveMenu();
-
-});
+}
   
 
 
