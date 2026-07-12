@@ -30,7 +30,7 @@ if (typeof loadData === "function") {
 const input = document.getElementById("newItem");
 const addBtn = document.getElementById("addBtn");
 const listContainer = document.getElementById("listContainer");
-const template = document.getElementById("itemTemplate");const deleteCompleted = document.getElementById("deleteCompleted");//=====================
+const template = document.getElementById("itemTemplate");  const deleteCompleted = document.getElementById("deleteCompleted");//=====================
 // افزودن آیتم
 //=====================
 
@@ -52,7 +52,9 @@ function addItem() {
 
     if (typeof saveData === "function") {
 
-        saveData(data);
+        if(typeof saveData === "function"){
+    saveData(data);
+}
 
     }
 
@@ -138,15 +140,15 @@ function getSections(){
 
         check.addEventListener("change",()=>{
 
-            item.completed=check.checked;
+    item.completed = check.checked;
 
-            saveData(data);
+    if(typeof saveData === "function"){
+        saveData(data);
+    }
 
-            render();
+    render();
 
-        });
-
-        // فلش چپ
+});        // فلش چپ
 
         left.addEventListener("click",()=>{
 
@@ -288,4 +290,6 @@ subTabs.forEach(btn=>{
 
     });
 
-}); deleteCompleted.addEventListener("click", clearCompleted);
+}); if(deleteCompleted){
+    deleteCompleted.addEventListener("click", clearCompleted);
+}
