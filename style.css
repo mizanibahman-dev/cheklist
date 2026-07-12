@@ -204,4 +204,30 @@ h1{
         font-size:14px;
     }
 
-}.
+}. .drag-handle{
+
+    cursor:grab;
+
+    font-size:24px;
+
+    padding:0 8px;
+
+    color:#666;
+
+    user-select:none;
+
+    touch-action:none;
+
+}
+
+.drag-handle:active{
+
+    cursor:grabbing;
+
+}
+
+.item.dragging{
+
+    opacity:.55;
+
+}
