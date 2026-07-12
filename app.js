@@ -30,7 +30,7 @@ if (typeof loadData === "function") {
 const input = document.getElementById("newItem");
 const addBtn = document.getElementById("addBtn");
 const listContainer = document.getElementById("listContainer");
-const template = document.getElementById("itemTemplate");const clearDoneBtn = document.getElementById("clearDoneBtn");//=====================
+const template = document.getElementById("itemTemplate");const deleteCompleted = document.getElementById("deleteCompleted");//=====================
 // افزودن آیتم
 //=====================
 
@@ -206,11 +206,7 @@ function moveItem(index,dir){
 
     render();
 
-} //=====================
-// حذف انجام شده ها
-//=====================
-
-function clearCompleted(){
+} function clearCompleted(){
 
     data[currentSection] = data[currentSection].filter(item => !item.completed);
 
@@ -292,4 +288,4 @@ subTabs.forEach(btn=>{
 
     });
 
-}); clearDoneBtn.addEventListener("click", clearCompleted);
+}); deleteCompleted.addEventListener("click", clearCompleted);
