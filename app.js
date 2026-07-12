@@ -30,7 +30,9 @@ if (typeof loadData === "function") {
 const input = document.getElementById("newItem");
 const addBtn = document.getElementById("addBtn");
 const listContainer = document.getElementById("listContainer");
-const template = document.getElementById("itemTemplate");  const deleteCompletedBtn = document.getElementById("deleteCompleted");//=====================
+const template = document.getElementById("itemTemplate");  const deleteCompletedBtn = document.getElementById("deleteCompleted");let dragIndex = -1;
+let dragElement = null;
+let isDragging = false; //=====================
 // افزودن آیتم
 //=====================
 
@@ -124,8 +126,7 @@ function getSections(){
 
         const right=node.querySelector(".move-right");
 
- const up = node.querySelector(".up");
-const down = node.querySelector(".down");  const handle=node.querySelector(".drag-handle");   text.textContent=item.text;
+ const menu = node.querySelector(".move-menu");     text.textContent=item.text;
 
         check.checked=item.completed;
 
@@ -165,33 +166,33 @@ const down = node.querySelector(".down");  const handle=node.querySelector(".dra
 
  // بالا
 
-up.addEventListener("click",()=>{
+menu.addEventListener("click", () => {
 
-    if(index===0)return;
+    const action = prompt(
+`1 = بالا
 
-    const list=data[currentSection];
+2 = پایین`
+    );
 
-    [list[index],list[index-1]]=[list[index-1],list[index]];
+    if(action==="1"){
 
-    if(typeof saveData==="function"){
+        if(index===0)return;
 
-        saveData(data);
+        const list=data[currentSection];
+
+        [list[index],list[index-1]]=[list[index-1],list[index]];
 
     }
 
-    render();
+    if(action==="2"){
 
-});
+        const list=data[currentSection];
 
-// پایین
+        if(index===list.length-1)return;
 
-down.addEventListener("click",()=>{
+        [list[index],list[index+1]]=[list[index+1],list[index]];
 
-    const list=data[currentSection];
-
-    if(index===list.length-1)return;
-
-    [list[index],list[index+1]]=[list[index+1],list[index]];
+    }
 
     if(typeof saveData==="function"){
 
