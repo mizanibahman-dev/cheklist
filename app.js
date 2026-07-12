@@ -168,7 +168,7 @@ function getSections(){
 
         });
 
- //menu.addEventListener("click",(e)=>{
+ menu.addEventListener("click",(e)=>{
 
     e.stopPropagation();
 
@@ -226,7 +226,7 @@ function getSections(){
 
     };
 
-});    listContainer.appendChild(node);
+    listContainer.appendChild(node);
 
     });
 
@@ -354,7 +354,7 @@ subTabs.forEach(btn=>{
 
     });
 
-}); if(deleteCompleted){
+}); if(deleteCompletedBtn){
     deleteCompletedBtn.addEventListener("click", clearCompleted);
 } document.addEventListener("click",()=>{
 
