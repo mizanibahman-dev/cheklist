@@ -30,7 +30,7 @@ if (typeof loadData === "function") {
 const input = document.getElementById("newItem");
 const addBtn = document.getElementById("addBtn");
 const listContainer = document.getElementById("listContainer");
-const template = document.getElementById("itemTemplate");//=====================
+const template = document.getElementById("itemTemplate");const clearDoneBtn = document.getElementById("clearDoneBtn");//=====================
 // افزودن آیتم
 //=====================
 
@@ -206,7 +206,21 @@ function moveItem(index,dir){
 
     render();
 
-}//=====================
+} //=====================
+// حذف انجام شده ها
+//=====================
+
+function clearCompleted(){
+
+    data[currentSection] = data[currentSection].filter(item => !item.completed);
+
+    if(typeof saveData === "function"){
+        saveData(data);
+    }
+
+    render();
+
+} //=====================
 // سربرگ های اصلی
 //=====================
 
@@ -278,4 +292,4 @@ subTabs.forEach(btn=>{
 
     });
 
-});
+}); clearDoneBtn.addEventListener("click", clearCompleted);
