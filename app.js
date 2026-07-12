@@ -124,9 +124,8 @@ function getSections(){
 
         const right=node.querySelector(".move-right");
 
-   const handle=node.querySelector(".drag-handle");  card.draggable = true;
-
-handle.draggable = false;   text.textContent=item.text;
+ const up = node.querySelector(".up");
+const down = node.querySelector(".down");  const handle=node.querySelector(".drag-handle");   text.textContent=item.text;
 
         check.checked=item.completed;
 
@@ -164,17 +163,45 @@ handle.draggable = false;   text.textContent=item.text;
 
         });
 
-   card.addEventListener("dragstart",()=>{
+ // بالا
 
-    card.classList.add("dragging");
+up.addEventListener("click",()=>{
+
+    if(index===0)return;
+
+    const list=data[currentSection];
+
+    [list[index],list[index-1]]=[list[index-1],list[index]];
+
+    if(typeof saveData==="function"){
+
+        saveData(data);
+
+    }
+
+    render();
 
 });
 
-card.addEventListener("dragend",()=>{
+// پایین
 
-    card.classList.remove("dragging");
+down.addEventListener("click",()=>{
 
-});     listContainer.appendChild(node);
+    const list=data[currentSection];
+
+    if(index===list.length-1)return;
+
+    [list[index],list[index+1]]=[list[index+1],list[index]];
+
+    if(typeof saveData==="function"){
+
+        saveData(data);
+
+    }
+
+    render();
+
+});    listContainer.appendChild(node);
 
     });
 
