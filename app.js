@@ -108,7 +108,11 @@ function getSections(){
 
         : shoppingSections;
 
-} function render(){
+} function closeMoveMenu(){
+
+    document.querySelectorAll(".move-popup").forEach(m=>m.remove());
+
+}  function render(){
 
     listContainer.innerHTML="";
 
@@ -164,43 +168,63 @@ function getSections(){
 
         });
 
- // بالا
+ //menu.addEventListener("click",(e)=>{
 
-menu.addEventListener("click", () => {
+    e.stopPropagation();
 
-    const action = prompt(
-`1 = بالا
+    closeMoveMenu();
 
-2 = پایین`
-    );
+    const popup=document.createElement("div");
 
-    if(action==="1"){
+    popup.className="move-popup";
 
-        if(index===0)return;
+    popup.innerHTML=`
+        <button class="go-up">⬆ بالا</button>
+        <button class="go-down">⬇ پایین</button>
+    `;
+
+    document.body.appendChild(popup);
+
+    const rect=menu.getBoundingClientRect();
+
+    popup.style.left=rect.left+"px";
+    popup.style.top=(rect.bottom+5)+"px";
+
+    popup.querySelector(".go-up").onclick=()=>{
+
+        if(index>0){
+
+            const list=data[currentSection];
+
+            [list[index],list[index-1]]=[list[index-1],list[index]];
+
+            saveData(data);
+
+            closeMoveMenu();
+
+            render();
+
+        }
+
+    };
+
+    popup.querySelector(".go-down").onclick=()=>{
 
         const list=data[currentSection];
 
-        [list[index],list[index-1]]=[list[index-1],list[index]];
+        if(index<list.length-1){
 
-    }
+            [list[index],list[index+1]]=[list[index+1],list[index]];
 
-    if(action==="2"){
+            saveData(data);
 
-        const list=data[currentSection];
+            closeMoveMenu();
 
-        if(index===list.length-1)return;
+            render();
 
-        [list[index],list[index+1]]=[list[index+1],list[index]];
+        }
 
-    }
-
-    if(typeof saveData==="function"){
-
-        saveData(data);
-
-    }
-
-    render();
+    };
 
 });    listContainer.appendChild(node);
 
@@ -332,7 +356,11 @@ subTabs.forEach(btn=>{
 
 }); if(deleteCompleted){
     deleteCompletedBtn.addEventListener("click", clearCompleted);
-}
+} document.addEventListener("click",()=>{
+
+    closeMoveMenu();
+
+});
   
 
 
