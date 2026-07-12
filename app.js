@@ -52,9 +52,7 @@ function addItem() {
 
     if (typeof saveData === "function") {
 
-        if(typeof saveData === "function"){
-    saveData(data);
-}
+        saveData(data);
 
     }
 
@@ -200,7 +198,9 @@ function moveItem(index,dir){
 
     data[sections[newIndex]].push(item);
 
+    if(typeof saveData === "function"){
     saveData(data);
+};
 
     currentSection=sections[newIndex];
 
