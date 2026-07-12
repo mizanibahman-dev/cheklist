@@ -168,7 +168,17 @@ function getSections(){
 
     });
 
-}//=====================
+} function clearCompleted(){
+
+    data[currentSection] = data[currentSection].filter(item => !item.completed);
+
+    if(typeof saveData === "function"){
+        saveData(data);
+    }
+
+    render();
+
+} //=====================
 // انتقال بین سربرگ ها
 //=====================
 
@@ -205,16 +215,6 @@ function moveItem(index,dir){
         }
 
     });
-
-    render();
-
-} function clearCompleted(){
-
-    data[currentSection] = data[currentSection].filter(item => !item.completed);
-
-    if(typeof saveData === "function"){
-        saveData(data);
-    }
 
     render();
 
@@ -293,3 +293,8 @@ subTabs.forEach(btn=>{
 }); if(deleteCompleted){
     deleteCompleted.addEventListener("click", clearCompleted);
 }
+  
+
+
+
+
