@@ -124,7 +124,9 @@ function getSections(){
 
         const right=node.querySelector(".move-right");
 
-        text.textContent=item.text;
+   const handle=node.querySelector(".drag-handle");  card.draggable = true;
+
+handle.draggable = false;   text.textContent=item.text;
 
         check.checked=item.completed;
 
@@ -162,7 +164,17 @@ function getSections(){
 
         });
 
-        listContainer.appendChild(node);
+   card.addEventListener("dragstart",()=>{
+
+    card.classList.add("dragging");
+
+});
+
+card.addEventListener("dragend",()=>{
+
+    card.classList.remove("dragging");
+
+});     listContainer.appendChild(node);
 
     });
 
