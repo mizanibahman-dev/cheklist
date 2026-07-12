@@ -30,7 +30,7 @@ if (typeof loadData === "function") {
 const input = document.getElementById("newItem");
 const addBtn = document.getElementById("addBtn");
 const listContainer = document.getElementById("listContainer");
-const template = document.getElementById("itemTemplate");  const deleteCompleted = document.getElementById("deleteCompleted");//=====================
+const template = document.getElementById("itemTemplate");  const deleteCompletedBtn = document.getElementById("deleteCompleted");//=====================
 // افزودن آیتم
 //=====================
 
@@ -291,7 +291,7 @@ subTabs.forEach(btn=>{
     });
 
 }); if(deleteCompleted){
-    deleteCompleted.addEventListener("click", clearCompleted);
+    deleteCompletedBtn.addEventListener("click", clearCompleted);
 }
   
 
