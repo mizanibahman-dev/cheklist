@@ -327,7 +327,7 @@ else if(currentMain==="company"){
 
 }        document.querySelectorAll(".sub-tab").forEach(t=>t.classList.remove("active"));
 
-        if(currentMain==="tasks"){
+        iif(currentMain==="tasks"){
 
     tasksTabs.querySelector(".sub-tab").classList.add("active");
 
