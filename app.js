@@ -287,7 +287,7 @@ const mainTabs = document.querySelectorAll(".main-tab");
 const subTabs = document.querySelectorAll(".sub-tab");
 
 const tasksTabs = document.getElementById("tasksTabs");
-const shoppingTabs = document.getElementById("shoppingTabs");const companyTabs = document.getElementById("companyTabs");
+const shoppingTabs = document.getElementById("shoppingTabs");
 
 mainTabs.forEach(btn=>{
 
@@ -299,49 +299,31 @@ mainTabs.forEach(btn=>{
 
         currentMain=btn.dataset.main;
 
-       if(currentMain==="tasks"){
+        if(currentMain==="tasks"){
 
-    tasksTabs.classList.remove("hidden");
-    shoppingTabs.classList.add("hidden");
-    companyTabs.classList.add("hidden");
+            tasksTabs.classList.remove("hidden");
+            shoppingTabs.classList.add("hidden");
 
-    currentSection="allTasks";
+            currentSection="allTasks";
 
-}
-else if(currentMain==="shopping"){
+        }else{
 
-    shoppingTabs.classList.remove("hidden");
-    tasksTabs.classList.add("hidden");
-    companyTabs.classList.add("hidden");
+            shoppingTabs.classList.remove("hidden");
+            tasksTabs.classList.add("hidden");
 
-    currentSection="dailyShopping";
+            currentSection="dailyShopping";
 
-}
-else if(currentMain==="company"){
+        }
 
-    companyTabs.classList.remove("hidden");
-    tasksTabs.classList.add("hidden");
-    shoppingTabs.classList.add("hidden");
+        document.querySelectorAll(".sub-tab").forEach(t=>t.classList.remove("active"));
 
-    currentSection="companyAll";
+        if(currentMain==="tasks"){
 
-}        document.querySelectorAll(".sub-tab").forEach(t=>t.classList.remove("active"));
+            tasksTabs.querySelector(".sub-tab").classList.add("active");
 
-        iif(currentMain==="tasks"){
+        }else{
 
-    tasksTabs.querySelector(".sub-tab").classList.add("active");
-
-}
-else if(currentMain==="shopping"){
-
-    shoppingTabs.querySelector(".sub-tab").classList.add("active");
-
-}
-else{
-
-    companyTabs.querySelector(".sub-tab").classList.add("active");
-
-}
+            shoppingTabs.querySelector(".sub-tab").classList.add("active");
 
         }
 
