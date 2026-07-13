@@ -122,7 +122,7 @@ function getSections(){
 
     }
 
-    return companySections;
+    if(currentMain==="company"){ return companySections; } 
 
 } function render(){
 
