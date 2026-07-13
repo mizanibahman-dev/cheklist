@@ -130,8 +130,11 @@ function getSections(){
 
 } function render(){
 
- console.log("currentSection =", currentSection);
-console.log("data =", data);   listContainer.innerHTML="";
+    console.log("currentMain =", currentMain);
+    console.log("currentSection =", currentSection);
+    console.log("keys =", Object.keys(data));
+
+    listContainer.innerHTML="";
 
     data[currentSection].forEach((item,index)=>{
 
