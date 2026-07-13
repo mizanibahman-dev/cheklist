@@ -10,9 +10,7 @@ let data = {
     currentTasks: [],
     todayTasks: [],
     dailyShopping: [],
-    otherShopping: [] companyAll: [],
-companyCurrent: [],
-companyToday: []
+    otherShopping: []
 };
 
 // اگر storage.js وجود دارد
@@ -98,29 +96,15 @@ const shoppingSections = [
 
     "otherShopping"
 
-];const companySections = [
+];
 
-    "companyAll",
+function getSections(){
 
-    "companyCurrent",
+    return currentMain==="tasks"
 
-    "companyToday"
+        ? taskSections
 
-]; function getSections(){
-
-    if(currentMain==="tasks"){
-
-        return taskSections;
-
-    }
-
-    if(currentMain==="shopping"){
-
-        return shoppingSections;
-
-    }
-
-    return companySections;
+        : shoppingSections;
 
 } function render(){
 
