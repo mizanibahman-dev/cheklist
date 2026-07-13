@@ -287,7 +287,7 @@ const mainTabs = document.querySelectorAll(".main-tab");
 const subTabs = document.querySelectorAll(".sub-tab");
 
 const tasksTabs = document.getElementById("tasksTabs");
-const shoppingTabs = document.getElementById("shoppingTabs");
+const shoppingTabs = document.getElementById("shoppingTabs");const companyTabs = document.getElementById("companyTabs");
 
 mainTabs.forEach(btn=>{
 
@@ -301,31 +301,49 @@ mainTabs.forEach(btn=>{
 
         if(currentMain==="tasks"){
 
-            tasksTabs.classList.remove("hidden");
-            shoppingTabs.classList.add("hidden");
+    tasksTabs.classList.remove("hidden");
+    shoppingTabs.classList.add("hidden");
+    companyTabs.classList.add("hidden");
 
-            currentSection="allTasks";
+    currentSection="allTasks";
 
-        }else{
+}
+else if(currentMain==="shopping"){
 
-            shoppingTabs.classList.remove("hidden");
-            tasksTabs.classList.add("hidden");
+    shoppingTabs.classList.remove("hidden");
+    tasksTabs.classList.add("hidden");
+    companyTabs.classList.add("hidden");
 
-            currentSection="dailyShopping";
+    currentSection="dailyShopping";
 
-        }
+}
+else if(currentMain==="company"){
+
+    companyTabs.classList.remove("hidden");
+    tasksTabs.classList.add("hidden");
+    shoppingTabs.classList.add("hidden");
+
+    currentSection="companyAll";
+
+}
 
         document.querySelectorAll(".sub-tab").forEach(t=>t.classList.remove("active"));
 
-        if(currentMain==="tasks"){
+       if(currentMain==="tasks"){
 
-            tasksTabs.querySelector(".sub-tab").classList.add("active");
+    tasksTabs.querySelector(".sub-tab").classList.add("active");
 
-        }else{
+}
+else if(currentMain==="shopping"){
 
-            shoppingTabs.querySelector(".sub-tab").classList.add("active");
+    shoppingTabs.querySelector(".sub-tab").classList.add("active");
 
-        }
+}
+else{
+
+    companyTabs.querySelector(".sub-tab").classList.add("active");
+
+}
 
         render();
 
