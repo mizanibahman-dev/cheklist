@@ -365,7 +365,7 @@ subTabs.forEach(btn=>{
 
         currentSection=btn.dataset.section;
 
-        render();
+  console.log(currentSection);      render();
 
     });
 
