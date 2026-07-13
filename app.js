@@ -317,7 +317,7 @@ else if(currentMain==="shopping"){
     currentSection="dailyShopping";
 
 }
-else (currentMain==="company"){
+else if(currentMain==="company"){
 
     companyTabs.classList.remove("hidden");
     tasksTabs.classList.add("hidden");
