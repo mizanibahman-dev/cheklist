@@ -21,7 +21,14 @@ if (typeof loadData === "function") {
 
     const saved = loadData();
 
-    if (saved) data = saved;
+    if (saved) {
+
+        data = {
+            ...data,
+            ...saved
+        };
+
+    }
 
 }
 
